@@ -5,7 +5,7 @@ import camelCase from 'camelcase'
 import fs from 'fs-extra'
 import knex from 'knex'
 
-function getType(
+export function getType(
 	op: 'table' | 'insertable' | 'updateable' | 'selectable',
 	desc: Desc,
 	config: Config,
@@ -73,7 +73,7 @@ function getType(
 		return field.join('.')
 	}
 	const generateEnumLikeField = (type: string) => {
-		const value = Type.replace('enum(', '').replace(')', '').replace(/,/g, ', ')
+		const value = Type.replace('enum(', '').replace(')', '').replace(/,/g, ',')
 		const field = [`z.enum([${value}])`]
 		if (isNull) field.push(nullable)
 		else if (hasDefaultValue) field.push(optional)
@@ -263,7 +263,7 @@ type ValidTypes =
 	| 'float'
 	| 'double'
 
-interface Desc {
+export interface Desc {
 	Field: string
 	Default: string | null
 	Extra: string

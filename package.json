@@ -10,7 +10,8 @@
 	"types": "dist/main.d.ts",
 	"files": ["dist"],
 	"scripts": {
-		"build": "esbuild src/main.ts --format=esm --platform=node --outfile=dist/main.js --minify && tsc src/main.ts -d --emitDeclarationOnly --esModuleInterop --outDir dist"
+		"build": "esbuild src/main.ts --format=esm --platform=node --outfile=dist/main.js --minify && tsc src/main.ts -d --emitDeclarationOnly --esModuleInterop --outDir dist",
+		"test": "vitest run"
 	},
 	"dependencies": {
 		"camelcase": "^8.0.0",
@@ -21,6 +22,7 @@
 	"devDependencies": {
 		"@types/fs-extra": "^11.0.3",
 		"esbuild": "^0.19.5",
-		"typescript": "^5.2.2"
+		"typescript": "^5.2.2",
+		"vitest": "^0.34.6"
 	}
 }

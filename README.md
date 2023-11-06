@@ -1,13 +1,15 @@
-# mysql-zod
+# zod-mysql
 
 Generate Zod interfaces from MySQL database
 
+This was a fork of [mysql-zod](https://github.com/erwinstone/mysql-zod) but it diverged so much we decided to make it a separate project and publish it to npm.
+
 ## Installation
 
-Install `mysql-zod` with npm
+Install `zod-mysql` with npm
 
 ```bash
-npm install mysql-zod --save-dev
+npm install zod-mysql --save-dev
 ```
 
 ## Usage/Examples
@@ -25,10 +27,10 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 );
 ```
-Use the mysql-zod API:
+Use the zod-mysql API:
 
 ```typescript
-import { generate } from 'mysql-zod'
+import { generate } from 'zod-mysql'
 
 await generate({
   host: '127.0.0.1',
