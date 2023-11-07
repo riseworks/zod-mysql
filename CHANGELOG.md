@@ -1,3 +1,6 @@
+3.1.0
+  - Add @zod{} column comment detection for overriding types
+
 3.0.0
   - Add `useDateType` option
   - Add `overrideTypes` option

@@ -23,6 +23,7 @@ describe('getType', () => {
 			Null: 'NO',
 			Type: 'date',
 			Field: 'date',
+			Comment: '',
 		}
 		const result = getType('table', desc, config)
 		expect(result).toEqual(
@@ -39,6 +40,7 @@ describe('getType', () => {
 			Null: 'NO' as const,
 			Type: 'varchar(255)',
 			Field: 'varchar',
+			Comment: '',
 		}
 		const result = getType('table', desc, config)
 		expect(result).toEqual('z.string().min(1)')
@@ -53,6 +55,7 @@ describe('getType', () => {
 			Null: 'NO',
 			Field: 'tinyint',
 			Type: 'tinyint(1)',
+			Comment: '',
 		}
 		const result = getType('table', desc, config)
 		expect(result).toEqual(
@@ -69,6 +72,7 @@ describe('getType', () => {
 			Null: 'NO',
 			Field: 'int',
 			Type: 'int(11)',
+			Comment: '',
 		}
 		const result = getType('table', desc, config)
 		expect(result).toEqual('z.number().optional().default(0)')
@@ -81,6 +85,7 @@ describe('getType', () => {
 			Null: 'NO',
 			Field: 'enum',
 			Type: "enum('foo', 'bar', 'baz')",
+			Comment: '',
 		}
 		const result = getType('table', desc, config)
 		expect(result).toEqual(
@@ -97,10 +102,28 @@ describe('getType', () => {
 			Null: 'NO',
 			Field: 'timestamp',
 			Type: 'timestamp',
+			Comment: '',
 		}
 		let result = getType('insertable', desc, config)
 		expect(result).toEqual(undefined)
 		result = getType('updateable', desc, config)
 		expect(result).toEqual(undefined)
+	})
+
+	test('should override a field type if a @zod commment exists on the column', ({
+		expect,
+	}) => {
+		const desc: Desc = {
+			Default: '0',
+			Extra: '',
+			Null: 'NO',
+			Field: 'int',
+			Type: 'int(11)',
+			Comment: '@zod{z.number().nonnegative().min(10)}',
+		}
+		const result = getType('table', desc, config)
+		expect(result).toEqual(
+			'z.number().nonnegative().min(10).optional().default(0)',
+		)
 	})
 })

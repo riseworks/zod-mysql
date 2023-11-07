@@ -10,7 +10,7 @@ export function getType(
 	desc: Desc,
 	config: Config,
 ) {
-	const { Default, Extra, Null, Type } = desc
+	const { Default, Extra, Null, Type, Comment } = desc
 	const isNullish = config.nullish && config.nullish === true
 	const hasDefaultValue = Default !== null && op !== 'selectable'
 	const isGenerated = ['DEFAULT_GENERATED', 'auto_increment'].includes(Extra)
@@ -35,7 +35,11 @@ export function getType(
 	const nonnegative = 'nonnegative()'
 	const isUpdateableFormat = op === 'updateable' && !isNull && !hasDefaultValue
 	const min1 = 'min(1)'
-	const typeOverride = config.overrideTypes?.[type as ValidTypes]
+	const zodOverrideRegex = /@zod{(.*)+}/
+	const hasZodOverrideComment = zodOverrideRegex.test(Comment)
+	const typeOverride = hasZodOverrideComment
+		? Comment.match(zodOverrideRegex)?.[1]
+		: config.overrideTypes?.[type as ValidTypes]
 	const generateDateLikeField = (type: string) => {
 		const field = typeOverride ? [typeOverride] : dateField
 		if (isNull) field.push(nullable)
@@ -163,7 +167,7 @@ export async function generate(config: Config) {
 	}
 
 	for (let table of tables) {
-		const d = await db.raw(`DESC ${table}`)
+		const d = await db.raw(`SHOW FULL COLUMNS FROM ${table}`)
 		const describes = d[0] as Desc[]
 		if (isCamelCase) table = camelCase(table)
 		let content = `import z from 'zod'
@@ -269,6 +273,7 @@ export interface Desc {
 	Extra: string
 	Type: string
 	Null: 'YES' | 'NO'
+	Comment: string
 }
 export interface Config {
 	host: string

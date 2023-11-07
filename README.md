@@ -19,7 +19,7 @@ Create user table:
 ```sql
 CREATE TABLE `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL COMMENT '@zod{z.string().min(10).max(255)}', -- this will override the type 
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `profile_picture` varchar(255) DEFAULT NULL,
@@ -48,7 +48,7 @@ import z from 'zod'
 
 export const user = z.object({
   id: z.number().nonnegative(),
-  name: z.string(),
+  name: z.string().min(10).max(255),
   username: z.string(),
   password: z.string(),
   profile_picture: z.string().nullable(),
@@ -56,7 +56,7 @@ export const user = z.object({
 })
 
 export const insertable_user = z.object({
-  name: z.string(),
+  name: z.string().min(10).max(255),
   username: z.string(),
   password: z.string(),
   profile_picture: z.string().nullable(),
@@ -64,7 +64,7 @@ export const insertable_user = z.object({
 })
 
 export const updateable_user = z.object({
-  name: z.string(),
+  name: z.string().min(10).max(255),
   username: z.string(),
   password: z.string(),
   profile_picture: z.string().nullable(),
@@ -73,7 +73,7 @@ export const updateable_user = z.object({
 
 export const selectable_user = z.object({
   id: z.number().nonnegative(),
-  name: z.string(),
+  name: z.string().min(10).max(255),
   username: z.string(),
   password: z.string(),
   profile_picture: z.string().nullable(),
