@@ -12,6 +12,9 @@ describe('getType', () => {
 		nullish: true,
 		requiredString: true,
 		useDateType: true,
+		overrideTypes: {
+			json: 'z.record(z.string())',
+		},
 	}
 
 	test('should return a custom Zod date field for date, datetime, and timestamp types', ({
@@ -38,7 +41,7 @@ describe('getType', () => {
 			Default: null,
 			Extra: '',
 			Null: 'NO' as const,
-			Type: 'varchar(255)',
+			Type: 'varchar',
 			Field: 'varchar',
 			Comment: '',
 		}
@@ -54,7 +57,7 @@ describe('getType', () => {
 			Extra: '',
 			Null: 'NO',
 			Field: 'tinyint',
-			Type: 'tinyint(1)',
+			Type: 'tinyint',
 			Comment: '',
 		}
 		const result = getType('table', desc, config)
@@ -71,7 +74,7 @@ describe('getType', () => {
 			Extra: '',
 			Null: 'NO',
 			Field: 'int',
-			Type: 'int(11)',
+			Type: 'int',
 			Comment: '',
 		}
 		const result = getType('table', desc, config)
@@ -118,12 +121,27 @@ describe('getType', () => {
 			Extra: '',
 			Null: 'NO',
 			Field: 'int',
-			Type: 'int(11)',
+			Type: 'int',
 			Comment: '@zod{z.number().nonnegative().min(10)}',
 		}
 		const result = getType('table', desc, config)
 		expect(result).toEqual(
 			'z.number().nonnegative().min(10).optional().default(0)',
 		)
+	})
+
+	test('should override a field type if a overrideTypes config exists on the column', ({
+		expect,
+	}) => {
+		const desc: Desc = {
+			Default: '{}',
+			Extra: '',
+			Null: 'NO',
+			Field: 'json',
+			Type: 'json',
+			Comment: '',
+		}
+		const result = getType('table', desc, config)
+		expect(result).toEqual("z.record(z.string()).min(1).default('{}')")
 	})
 })

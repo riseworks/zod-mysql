@@ -291,5 +291,5 @@ export interface Config {
 	useDateType?: boolean
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	ssl?: Record<string, any>
-	overrideTypes?: Record<ValidTypes, string>
+	overrideTypes?: { [k in ValidTypes]?: string }
 }
