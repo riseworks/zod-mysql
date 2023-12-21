@@ -49,6 +49,21 @@ describe('getType', () => {
 		expect(result).toEqual('z.string().min(1)')
 	})
 
+	test('should return a Zod string with trim() if useTrim is true', ({
+		expect,
+	}) => {
+		const desc: Desc = {
+			Default: null,
+			Extra: '',
+			Null: 'NO' as const,
+			Type: 'varchar',
+			Field: 'varchar',
+			Comment: '',
+		}
+		const result = getType('table', desc, { ...config, useTrim: true })
+		expect(result).toEqual('z.string().trim().min(1)')
+	})
+
 	test('should return a custom Zod boolean field for tinyint types', ({
 		expect,
 	}) => {

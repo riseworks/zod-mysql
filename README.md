@@ -107,6 +107,7 @@ export type SelectableUserType = z.infer<typeof selectable_user>
     "cert": "path/to/cert.pem",
     "key": "path/to/key.pem"
   },
+  "useTrim": false,
   "useDateType": false,
   "overrideTypes": {
     "tinyint": "z.boolean()"
@@ -125,4 +126,5 @@ export type SelectableUserType = z.infer<typeof selectable_user>
 | requiredString | Add `min(1)` for string schema |
 | ssl | SSL credentials to use when connecting to server. |
 | useDateType | Use a specialized Zod type for date-like fields instead of string
+| useTrim | Use `z.string().trim()` instead of `z.string()` |
 | overrideTypes | Override zod types for specific field types |

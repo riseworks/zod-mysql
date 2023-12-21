@@ -1,3 +1,5 @@
+3.2.0
+  - Add `useTrim` option 
 3.1.0
   - Add @zod{} column comment detection for overriding types
 

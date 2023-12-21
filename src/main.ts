@@ -12,6 +12,7 @@ export function getType(
 ) {
 	const { Default, Extra, Null, Type, Comment } = desc
 	const isNullish = config.nullish && config.nullish === true
+	const isTrim = config.useTrim && config.useTrim === true
 	const hasDefaultValue = Default !== null && op !== 'selectable'
 	const isGenerated = ['DEFAULT_GENERATED', 'auto_increment'].includes(Extra)
 	const isNull = Null === 'YES'
@@ -24,7 +25,7 @@ export function getType(
 	const zDate = [
 		'z.union([z.number(), z.string(), z.date()]).pipe(z.coerce.date())',
 	]
-	const string = ['z.string()']
+	const string = [isTrim ? 'z.string().trim()' : 'z.string()']
 	const number = ['z.number()']
 	const boolean = [
 		'z.union([z.number(),z.string(),z.boolean()]).pipe(z.coerce.boolean())',
@@ -289,6 +290,7 @@ export interface Config {
 	nullish?: boolean
 	requiredString?: boolean
 	useDateType?: boolean
+	useTrim?: boolean
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	ssl?: Record<string, any>
 	overrideTypes?: { [k in ValidTypes]?: string }
