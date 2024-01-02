@@ -12,14 +12,17 @@ export function getType(
 ) {
 	const { Default, Extra, Null, Type, Comment } = desc
 	const isNullish = config.nullish && config.nullish === true
-	const isTrim = config.useTrim && config.useTrim === true
+	const isTrim =
+		config.useTrim && config.useTrim === true && op !== 'selectable'
 	const hasDefaultValue = Default !== null && op !== 'selectable'
 	const isGenerated = ['DEFAULT_GENERATED', 'auto_increment'].includes(Extra)
 	const isNull = Null === 'YES'
 	if (isGenerated && !isNull && ['insertable', 'updateable'].includes(op))
 		return
 	const isRequiredString =
-		config.requiredString && config.requiredString === true
+		config.requiredString &&
+		config.requiredString === true &&
+		op !== 'selectable'
 	const isUseDateType = config.useDateType && config.useDateType === true
 	const type = Type.split('(')[0].split(' ')[0]
 	const zDate = [

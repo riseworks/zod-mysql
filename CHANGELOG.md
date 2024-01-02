@@ -1,3 +1,5 @@
+3.3.0
+  - Shouldn't add trim() and min(1) on selectable fields
 3.2.0
   - Add `useTrim` option 
 3.1.0
