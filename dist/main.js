@@ -20,4 +20,4 @@ export type ${m(`${e}Type`,{pascalCase:!0})} = z.infer<typeof ${e}>
 export type Insertable${m(`${e}Type`,{pascalCase:!0})} = z.infer<typeof insertable_${e}>
 export type Updateable${m(`${e}Type`,{pascalCase:!0})} = z.infer<typeof updateable_${e}>
 export type Selectable${m(`${e}Type`,{pascalCase:!0})} = z.infer<typeof selectable_${e}>
-`;const _=t.folder&&t.folder!==""?t.folder:".",E=t.suffix&&t.suffix!==""?`${e}.${t.suffix}.ts`:`${e}.ts`,c=q.join(_,E);console.log("Created:",c),W.outputFileSync(c,s)}await g.destroy()}export{I as generate,D as getType};
+`;const _=t.folder&&t.folder!==""?t.folder:".",E=t.suffix&&t.suffix!==""?`${e}.${t.suffix}.ts`:`${e}.ts`,c=q.join(_,E);t.silent||console.log("Created:",c),W.outputFileSync(c,s)}await g.destroy()}export{I as generate,D as getType};

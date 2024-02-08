@@ -243,7 +243,7 @@ export type Selectable${camelCase(`${table}Type`, {
 				? `${table}.${config.suffix}.ts`
 				: `${table}.ts`
 		const dest = path.join(dir, file)
-		console.log('Created:', dest)
+		if (!config.silent) console.log('Created:', dest)
 		fs.outputFileSync(dest, content)
 	}
 	await db.destroy()
@@ -294,6 +294,7 @@ export interface Config {
 	requiredString?: boolean
 	useDateType?: boolean
 	useTrim?: boolean
+	silent?: boolean
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	ssl?: Record<string, any>
 	overrideTypes?: { [k in ValidTypes]?: string }

@@ -24,6 +24,7 @@ export interface Config {
     requiredString?: boolean;
     useDateType?: boolean;
     useTrim?: boolean;
+    silent?: boolean;
     ssl?: Record<string, any>;
     overrideTypes?: {
         [k in ValidTypes]?: string;

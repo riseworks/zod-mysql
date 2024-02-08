@@ -109,6 +109,7 @@ export type SelectableUserType = z.infer<typeof selectable_user>
   },
   "useTrim": false,
   "useDateType": false,
+  "silent": false,
   "overrideTypes": {
     "tinyint": "z.boolean()"
   }
@@ -127,4 +128,5 @@ export type SelectableUserType = z.infer<typeof selectable_user>
 | ssl | SSL credentials to use when connecting to server. |
 | useDateType | Use a specialized Zod type for date-like fields instead of string
 | useTrim | Use `z.string().trim()` instead of `z.string()` |
+| silent | Don't log anything to the console |
 | overrideTypes | Override zod types for specific field types |

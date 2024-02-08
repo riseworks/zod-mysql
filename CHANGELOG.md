@@ -1,7 +1,12 @@
+3.4.0
+  - Add `silent` option
+
 3.3.0
   - Shouldn't add trim() and min(1) on selectable fields
+  
 3.2.0
   - Add `useTrim` option 
+
 3.1.0
   - Add @zod{} column comment detection for overriding types
 
