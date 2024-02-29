@@ -55,8 +55,8 @@ export function getType(
 	const generateStringLikeField = (type: string) => {
 		const field = typeOverride ? [typeOverride] : string
 		if (isNull) field.push(nullable)
-		else if (isRequiredString) field.push(min1)
 		else if (hasDefaultValue) field.push(optional)
+		else if (isRequiredString) field.push(min1)
 		if (hasDefaultValue && !isGenerated) field.push(`default('${Default}')`)
 		if (isUpdateableFormat) field.push(optional)
 		return field.join('.')
