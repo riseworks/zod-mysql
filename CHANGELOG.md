@@ -1,3 +1,6 @@
+3.4.1
+  - Fix default value for strings
+
 3.4.0
   - Add `silent` option
 
