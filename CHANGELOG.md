@@ -1,3 +1,6 @@
+3.4.2
+  - Fix generated zod import statement
+  
 3.4.1
   - Fix default value for strings
 

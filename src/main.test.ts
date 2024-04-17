@@ -157,6 +157,6 @@ describe('getType', () => {
 			Comment: '',
 		}
 		const result = getType('table', desc, config)
-		expect(result).toEqual("z.record(z.string()).min(1).default('{}')")
+		expect(result).toEqual("z.record(z.string()).optional().default('{}')")
 	})
 })

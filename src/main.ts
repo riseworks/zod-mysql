@@ -174,7 +174,7 @@ export async function generate(config: Config) {
 		const d = await db.raw(`SHOW FULL COLUMNS FROM ${table}`)
 		const describes = d[0] as Desc[]
 		if (isCamelCase) table = camelCase(table)
-		let content = `import z from 'zod'
+		let content = `import { z } from 'zod'
 
 export const ${table} = z.object({`
 		for (const desc of describes) {
