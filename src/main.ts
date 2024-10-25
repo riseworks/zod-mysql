@@ -144,6 +144,7 @@ export async function generate(config: Config) {
 		[config.database],
 	)
 	let tables = t[0].map((row) => row.table_name).sort()
+	const dests: string[] = []
 
 	const includedTables = config.tables
 	if (includedTables?.length)
@@ -243,10 +244,12 @@ export type Selectable${camelCase(`${table}Type`, {
 				? `${table}.${config.suffix}.ts`
 				: `${table}.ts`
 		const dest = path.join(dir, file)
+		dests.push(dest)
 		if (!config.silent) console.log('Created:', dest)
 		fs.outputFileSync(dest, content)
 	}
 	await db.destroy()
+	return dests
 }
 
 type ValidTypes =
