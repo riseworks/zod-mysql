@@ -1,5 +1,5 @@
 export declare function getType(op: 'table' | 'insertable' | 'updateable' | 'selectable', desc: Desc, config: Config): string;
-export declare function generate(config: Config): Promise<void>;
+export declare function generate(config: Config): Promise<string[]>;
 type ValidTypes = 'date' | 'datetime' | 'timestamp' | 'time' | 'year' | 'char' | 'varchar' | 'tinytext' | 'text' | 'mediumtext' | 'longtext' | 'json' | 'decimal' | 'tinyint' | 'smallint' | 'mediumint' | 'int' | 'bigint' | 'float' | 'double';
 export interface Desc {
     Field: string;
