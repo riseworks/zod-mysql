@@ -1,3 +1,6 @@
+3.4.3
+  - Return an array of generated file paths on generate
+  
 3.4.2
   - Fix generated zod import statement
   
