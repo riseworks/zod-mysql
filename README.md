@@ -19,7 +19,7 @@ Create user table:
 ```sql
 CREATE TABLE `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL COMMENT '@zod{z.string().min(10).max(255)}', -- this will override the type 
+  `name` varchar(255) NOT NULL COMMENT '@zod(z.string().min(10).max(255))', -- this will override the type 
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `profile_picture` varchar(255) DEFAULT NULL,

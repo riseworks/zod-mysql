@@ -49,7 +49,10 @@ export function getType(
 		? Comment.match(zodOverrideRegex)?.[1]
 		: config.overrideTypes?.[type as ValidTypes];
 	const generateDateLikeField = () => {
-		if (zodOverrideType) return zodOverrideType;
+		if (zodOverrideType)
+			return isUpdateableFormat
+				? zodOverrideType
+				: `${zodOverrideType}.optional()`;
 		const field = typeOverride ? [typeOverride] : dateField;
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
@@ -58,7 +61,10 @@ export function getType(
 		return field.join(".");
 	};
 	const generateStringLikeField = () => {
-		if (zodOverrideType) return zodOverrideType;
+		if (zodOverrideType)
+			return isUpdateableFormat
+				? zodOverrideType
+				: `${zodOverrideType}.optional()`;
 		const field = typeOverride ? [typeOverride] : string;
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
@@ -68,7 +74,10 @@ export function getType(
 		return field.join(".");
 	};
 	const generateBooleanLikeField = () => {
-		if (zodOverrideType) return zodOverrideType;
+		if (zodOverrideType)
+			return isUpdateableFormat
+				? zodOverrideType
+				: `${zodOverrideType}.optional()`;
 		const field = typeOverride ? [typeOverride] : boolean;
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
@@ -78,7 +87,10 @@ export function getType(
 		return field.join(".");
 	};
 	const generateNumberLikeField = () => {
-		if (zodOverrideType) return zodOverrideType;
+		if (zodOverrideType)
+			return isUpdateableFormat
+				? zodOverrideType
+				: `${zodOverrideType}.optional()`;
 		const unsigned = Type.endsWith(" unsigned");
 		const field = typeOverride ? [typeOverride] : number;
 		if (unsigned) field.push(nonnegative);
@@ -89,7 +101,10 @@ export function getType(
 		return field.join(".");
 	};
 	const generateEnumLikeField = () => {
-		if (zodOverrideType) return zodOverrideType;
+		if (zodOverrideType)
+			return isUpdateableFormat
+				? zodOverrideType
+				: `${zodOverrideType}.optional()`;
 		const value = Type.replace("enum(", "").replace(")", "").replace(/,/g, ",");
 		const field = [`z.enum([${value}])`];
 		if (isNull) field.push(nullable);
