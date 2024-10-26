@@ -1,7 +1,7 @@
 {
 	"name": "zod-mysql",
 	"type": "module",
-	"version": "4.1.2",
+	"version": "4.1.3",
 	"description": "Generate Zod interfaces from MySQL database",
 	"author": "Alisson Cavalcante Agiani <alisson@riseworks.io>",
 	"license": "MIT",

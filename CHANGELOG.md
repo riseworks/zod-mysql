@@ -1,3 +1,9 @@
+4.1.3
+  - Bugfix on @zod
+
+4.1.2
+  - Bugfix on @zod
+
 4.1.1
   - Bugfix on @zod
 
