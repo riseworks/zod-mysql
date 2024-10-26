@@ -137,12 +137,10 @@ describe("getType", () => {
 			Null: "NO",
 			Field: "int",
 			Type: "int",
-			Comment: "@zod(z.number().nonnegative().min(10))",
+			Comment: "@ts(Foo) @zod(z.number().nonnegative().min(10))",
 		};
 		const result = getType("table", desc, config);
-		expect(result).toEqual(
-			"z.number().nonnegative().min(10).optional().default(0)",
-		);
+		expect(result).toEqual("z.number().nonnegative().min(10)");
 	});
 
 	test("should override a field type if a overrideTypes config exists on the column", ({

@@ -42,10 +42,14 @@ export function getType(
 	const min1 = "min(1)";
 	const zodOverrideRegex = /@zod\((.*)+\)/;
 	const hasZodOverrideComment = zodOverrideRegex.test(Comment);
+	const zodOverrideType = hasZodOverrideComment
+		? Comment.match(zodOverrideRegex)?.[1]
+		: null;
 	const typeOverride = hasZodOverrideComment
 		? Comment.match(zodOverrideRegex)?.[1]
 		: config.overrideTypes?.[type as ValidTypes];
-	const generateDateLikeField = (type: string) => {
+	const generateDateLikeField = () => {
+		if (zodOverrideType) return zodOverrideType;
 		const field = typeOverride ? [typeOverride] : dateField;
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
@@ -53,7 +57,8 @@ export function getType(
 		if (isUpdateableFormat) field.push(optional);
 		return field.join(".");
 	};
-	const generateStringLikeField = (type: string) => {
+	const generateStringLikeField = () => {
+		if (zodOverrideType) return zodOverrideType;
 		const field = typeOverride ? [typeOverride] : string;
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
@@ -62,7 +67,8 @@ export function getType(
 		if (isUpdateableFormat) field.push(optional);
 		return field.join(".");
 	};
-	const generateBooleanLikeField = (type: string) => {
+	const generateBooleanLikeField = () => {
+		if (zodOverrideType) return zodOverrideType;
 		const field = typeOverride ? [typeOverride] : boolean;
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
@@ -71,7 +77,8 @@ export function getType(
 		if (isUpdateableFormat) field.push(optional);
 		return field.join(".");
 	};
-	const generateNumberLikeField = (type: string) => {
+	const generateNumberLikeField = () => {
+		if (zodOverrideType) return zodOverrideType;
 		const unsigned = Type.endsWith(" unsigned");
 		const field = typeOverride ? [typeOverride] : number;
 		if (unsigned) field.push(nonnegative);
@@ -81,7 +88,8 @@ export function getType(
 		if (isUpdateableFormat) field.push(optional);
 		return field.join(".");
 	};
-	const generateEnumLikeField = (type: string) => {
+	const generateEnumLikeField = () => {
+		if (zodOverrideType) return zodOverrideType;
 		const value = Type.replace("enum(", "").replace(")", "").replace(/,/g, ",");
 		const field = [`z.enum([${value}])`];
 		if (isNull) field.push(nullable);
@@ -94,7 +102,7 @@ export function getType(
 		case "date":
 		case "datetime":
 		case "timestamp": {
-			return generateDateLikeField(type);
+			return generateDateLikeField();
 		}
 		case "tinytext":
 		case "text":
@@ -106,10 +114,10 @@ export function getType(
 		case "year":
 		case "char":
 		case "varchar": {
-			return generateStringLikeField(type);
+			return generateStringLikeField();
 		}
 		case "tinyint": {
-			return generateBooleanLikeField(type);
+			return generateBooleanLikeField();
 		}
 		case "smallint":
 		case "mediumint":
@@ -117,10 +125,10 @@ export function getType(
 		case "bigint":
 		case "float":
 		case "double": {
-			return generateNumberLikeField(type);
+			return generateNumberLikeField();
 		}
 		case "enum": {
-			return generateEnumLikeField(type);
+			return generateEnumLikeField();
 		}
 	}
 }
