@@ -55,7 +55,7 @@ export function getType(
 		const field = typeOverride ? [typeOverride] : string;
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
-		else if (isRequiredString) field.push(min1);
+		else if (isRequiredString && !typeOverride) field.push(min1);
 		if (hasDefaultValue && !isGenerated) field.push(`default('${Default}')`);
 		if (isUpdateableFormat) field.push(optional);
 		return field.join(".");
@@ -72,7 +72,7 @@ export function getType(
 	const generateNumberLikeField = () => {
 		const unsigned = Type.endsWith(" unsigned");
 		const field = typeOverride ? [typeOverride] : number;
-		if (unsigned) field.push(nonnegative);
+		if (unsigned && !typeOverride) field.push(nonnegative);
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
 		if (hasDefaultValue && !isGenerated) field.push(`default(${Default})`);
