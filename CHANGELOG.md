@@ -1,3 +1,6 @@
+4.0.0
+  - Change the @zod comment detection regex to be enclosed in parentheses
+  
 3.4.3
   - Return an array of generated file paths on generate
   
