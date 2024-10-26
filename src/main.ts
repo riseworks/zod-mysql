@@ -63,8 +63,8 @@ export function getType(
 	const generateStringLikeField = () => {
 		if (zodOverrideType)
 			return isUpdateableFormat
-				? zodOverrideType
-				: `${zodOverrideType}.optional()`;
+				? `${zodOverrideType}.optional()`
+				: zodOverrideType;
 		const field = typeOverride ? [typeOverride] : string;
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
@@ -76,8 +76,8 @@ export function getType(
 	const generateBooleanLikeField = () => {
 		if (zodOverrideType)
 			return isUpdateableFormat
-				? zodOverrideType
-				: `${zodOverrideType}.optional()`;
+				? `${zodOverrideType}.optional()`
+				: zodOverrideType;
 		const field = typeOverride ? [typeOverride] : boolean;
 		if (isNull) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
@@ -89,8 +89,8 @@ export function getType(
 	const generateNumberLikeField = () => {
 		if (zodOverrideType)
 			return isUpdateableFormat
-				? zodOverrideType
-				: `${zodOverrideType}.optional()`;
+				? `${zodOverrideType}.optional()`
+				: zodOverrideType;
 		const unsigned = Type.endsWith(" unsigned");
 		const field = typeOverride ? [typeOverride] : number;
 		if (unsigned) field.push(nonnegative);
@@ -103,8 +103,8 @@ export function getType(
 	const generateEnumLikeField = () => {
 		if (zodOverrideType)
 			return isUpdateableFormat
-				? zodOverrideType
-				: `${zodOverrideType}.optional()`;
+				? `${zodOverrideType}.optional()`
+				: zodOverrideType;
 		const value = Type.replace("enum(", "").replace(")", "").replace(/,/g, ",");
 		const field = [`z.enum([${value}])`];
 		if (isNull) field.push(nullable);
