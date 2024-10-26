@@ -45,7 +45,7 @@ export function getType(
 		zodOverrideType ?? config.overrideTypes?.[type as ValidTypes];
 	const generateDateLikeField = () => {
 		const field = typeOverride ? [typeOverride] : dateField;
-		if (isNull) field.push(nullable);
+		if (isNull && !typeOverride) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
 		if (hasDefaultValue && !isGenerated) field.push(`default('${Default}')`);
 		if (isUpdateableFormat) field.push(optional);
@@ -53,7 +53,7 @@ export function getType(
 	};
 	const generateStringLikeField = () => {
 		const field = typeOverride ? [typeOverride] : string;
-		if (isNull) field.push(nullable);
+		if (isNull && !typeOverride) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
 		else if (isRequiredString && !typeOverride) field.push(min1);
 		if (hasDefaultValue && !isGenerated) field.push(`default('${Default}')`);
@@ -62,7 +62,7 @@ export function getType(
 	};
 	const generateBooleanLikeField = () => {
 		const field = typeOverride ? [typeOverride] : boolean;
-		if (isNull) field.push(nullable);
+		if (isNull && !typeOverride) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
 		if (hasDefaultValue && !isGenerated)
 			field.push(`default(${Boolean(+Default)})`);
@@ -73,7 +73,7 @@ export function getType(
 		const unsigned = Type.endsWith(" unsigned");
 		const field = typeOverride ? [typeOverride] : number;
 		if (unsigned && !typeOverride) field.push(nonnegative);
-		if (isNull) field.push(nullable);
+		if (isNull && !typeOverride) field.push(nullable);
 		else if (hasDefaultValue) field.push(optional);
 		if (hasDefaultValue && !isGenerated) field.push(`default(${Default})`);
 		if (isUpdateableFormat) field.push(optional);
