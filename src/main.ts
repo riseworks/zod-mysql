@@ -40,14 +40,8 @@ export function getType(
 	const nonnegative = "nonnegative()";
 	const isUpdateableFormat = op === "updateable" && !isNull && !hasDefaultValue;
 	const min1 = "min(1)";
-	const zodOverrideRegex = /@zod\((.*)+\)/;
-	const hasZodOverrideComment = zodOverrideRegex.test(Comment);
-	const zodOverrideType = hasZodOverrideComment
-		? Comment.match(zodOverrideRegex)?.[1]
-		: null;
-	const typeOverride = hasZodOverrideComment
-		? Comment.match(zodOverrideRegex)?.[1]
-		: config.overrideTypes?.[type as ValidTypes];
+	const zodOverrideType = Comment.match(/@zod\((.*)+\)/)?.[1] ?? null;
+	const typeOverride = config.overrideTypes?.[type as ValidTypes];
 	const generateDateLikeField = () => {
 		if (zodOverrideType)
 			return isUpdateableFormat
