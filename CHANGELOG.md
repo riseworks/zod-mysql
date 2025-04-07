@@ -1,3 +1,6 @@
+4.1.6
+  - Throw on unsupported column types
+  
 4.1.5
   - Bugfix on @zod
 

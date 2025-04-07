@@ -1,12 +1,12 @@
-export declare function getType(op: "table" | "insertable" | "updateable" | "selectable", desc: Desc, config: Config): string;
+export declare function getType(op: 'table' | 'insertable' | 'updateable' | 'selectable', desc: Desc, config: Config): string;
 export declare function generate(config: Config): Promise<string[]>;
-type ValidTypes = "date" | "datetime" | "timestamp" | "time" | "year" | "char" | "varchar" | "tinytext" | "text" | "mediumtext" | "longtext" | "json" | "decimal" | "tinyint" | "smallint" | "mediumint" | "int" | "bigint" | "float" | "double";
+type ValidTypes = 'date' | 'datetime' | 'timestamp' | 'time' | 'year' | 'char' | 'varchar' | 'tinytext' | 'text' | 'mediumtext' | 'longtext' | 'json' | 'decimal' | 'tinyint' | 'smallint' | 'mediumint' | 'int' | 'bigint' | 'float' | 'double';
 export interface Desc {
     Field: string;
     Default: string | null;
     Extra: string;
     Type: string;
-    Null: "YES" | "NO";
+    Null: 'YES' | 'NO';
     Comment: string;
 }
 export interface Config {

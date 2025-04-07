@@ -1,30 +1,28 @@
 {
-	"name": "zod-mysql",
-	"type": "module",
-	"version": "4.1.5",
-	"description": "Generate Zod interfaces from MySQL database",
-	"author": "Alisson Cavalcante Agiani <alisson@riseworks.io>",
-	"license": "MIT",
-	"repository": "git@github.com:riseworks/zod-mysql.git",
-	"main": "dist/main.js",
-	"types": "dist/main.d.ts",
-	"files": [
-		"dist"
-	],
-	"scripts": {
-		"build": "esbuild src/main.ts --format=esm --platform=node --outfile=dist/main.js --minify && tsc src/main.ts -d --emitDeclarationOnly --esModuleInterop --outDir dist",
-		"test": "vitest run"
-	},
-	"dependencies": {
-		"camelcase": "^8.0.0",
-		"fs-extra": "^11.1.1",
-		"knex": "^3.0.1",
-		"mysql2": "^3.6.3"
-	},
-	"devDependencies": {
-		"@types/fs-extra": "^11.0.3",
-		"esbuild": "^0.19.5",
-		"typescript": "^5.2.2",
-		"vitest": "^0.34.6"
-	}
+  "name": "zod-mysql",
+  "type": "module",
+  "version": "4.1.6",
+  "description": "Generate Zod interfaces from MySQL database",
+  "author": "Alisson Cavalcante Agiani <alisson@riseworks.io>",
+  "license": "MIT",
+  "repository": "git@github.com:riseworks/zod-mysql.git",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "esbuild src/main.ts --format=esm --platform=node --outfile=dist/main.js --minify && tsc src/main.ts -d --emitDeclarationOnly --esModuleInterop --outDir dist",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "camelcase": "^8.0.0",
+    "fs-extra": "^11.1.1",
+    "knex": "^3.0.1",
+    "mysql2": "^3.6.3"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.3",
+    "esbuild": "^0.19.5",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  }
 }
