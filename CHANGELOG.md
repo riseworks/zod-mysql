@@ -1,3 +1,6 @@
+4.1.7
+  - Replace @zod regex with function
+
 4.1.6
   - Throw on unsupported column types
   
