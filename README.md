@@ -110,6 +110,7 @@ export type SelectableUserType = z.infer<typeof selectable_user>
   "useTrim": false,
   "useDateType": false,
   "silent": false,
+  "zodCommentTypes": true,
   "overrideTypes": {
     "tinyint": "z.boolean()"
   }
@@ -130,3 +131,4 @@ export type SelectableUserType = z.infer<typeof selectable_user>
 | useTrim | Use `z.string().trim()` instead of `z.string()` |
 | silent | Don't log anything to the console |
 | overrideTypes | Override zod types for specific field types |
+| zodCommentTypes | Use @zod comment to override entire type |

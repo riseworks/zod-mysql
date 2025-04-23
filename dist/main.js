@@ -70,7 +70,7 @@ function getType(op, desc, config) {
   const nonnegative = "nonnegative()";
   const isUpdateableFormat = op === "updateable" && !isNull && !hasDefaultValue;
   const min1 = "min(1)";
-  const zodOverrideType = extractZodExpression(Comment);
+  const zodOverrideType = config.zodCommentTypes ? extractZodExpression(Comment) : null;
   const typeOverride = zodOverrideType ?? config.overrideTypes?.[type];
   const generateDateLikeField = () => {
     const field = typeOverride ? [typeOverride] : dateField;

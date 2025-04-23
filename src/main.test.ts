@@ -1,5 +1,5 @@
 import { describe, test } from 'vitest'
-import { type Config, type Desc, getType } from './main'
+import { type Config, type Desc, getType } from './main.js'
 
 describe('getType', () => {
   const config: Config = {
@@ -15,6 +15,7 @@ describe('getType', () => {
     overrideTypes: {
       json: 'z.record(z.string())',
     },
+    zodCommentTypes: true,
   }
 
   test('should return a custom Zod date field for date, datetime, and timestamp types', ({

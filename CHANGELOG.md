@@ -1,3 +1,6 @@
+4.1.8
+  - Add new config zodCommentTypes
+
 4.1.7
   - Replace @zod regex with function
 
